@@ -1,0 +1,65 @@
+<html>
+        <head>
+            <title>Home</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!-- Latest compiled and minified CSS -->
+           	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+          	<!-- Optional theme -->
+          	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+        	
+        	
+        </head>
+        <body>
+        	<!-- FB integration SDK -->
+        	<div id="fb-root">
+	        	<h4>
+	        	Web Voting </h4>
+        	</div>
+		    <script>
+		      window.fbAsyncInit = function() {
+		        FB.init({
+		          appId      : '{627796963977885}',
+		          status     : true,
+		          xfbml      : true
+		        });
+		      };
+		
+		      (function(d, s, id){
+		        var js, fjs = d.getElementsByTagName(s)[0];
+		        if (d.getElementById(id)) {return;}
+		        js = d.createElement(s); js.id = id;
+		        js.src = "//connect.facebook.net/en_US/all.js";
+		        fjs.parentNode.insertBefore(js, fjs);
+		      }(document, 'script', 'facebook-jssdk'));
+		    </script>
+            <div class="container">
+                <div class="jumbotron">
+                <div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>
+					<!--<script id="searchPoll" type="text/template"> -->
+						<div>
+							<label>Question</label>
+							<input id="queSubString" type="text" class="span3" placeholder="Type a Question SubString">
+							<input id="search" type="image" value="Remove" src="../../../assets/js/search.jpeg" width="20" height="20" />
+							<span class="help-inline">eg:subject as in "What is your favorite subject?"</span>
+						</div>
+                    <!-- calls getPolls() from UserResource -->
+                    <div>
+	                    <ul>
+		                    {{#poll}}
+		                        <li> <a id="{{id}}" href="{{id}}"> {{question}} </a> </li>
+		                    {{/poll}}
+	                    </ul>
+	                </div>
+                </div>
+            </div> <!-- end of container -->
+           
+            <!-- script tags -->
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="//code.jquery.com/jquery.js"></script>
+            <!-- Latest compiled and minified JavaScript -->
+			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+			<!-- application ui scripts -->
+			<script src="../../../assets/js/search.js"></script> 
+        </body>
+</html>

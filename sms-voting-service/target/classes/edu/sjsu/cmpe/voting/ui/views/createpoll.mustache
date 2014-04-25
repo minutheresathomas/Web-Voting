@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+		<!-- script tags -->
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="//code.jquery.com/jquery.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<!-- application ui scripts -->
+		
+		
+		<script type="text/javascript">
+			$(function() {
+				$("#datepicker").datepicker();
+			});
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				$( "#accordion" ).accordion();
+			});
+		</script>
+		<script type="text/javascript">
+			function GetDynamicTextBox(value){
+			
+				return '<input id="addtxt" name = "DynamicTextBox" type="text" value = "' + value + '" />' +
+				'<input type="image" value="Remove" src="../../../assets/js/delete.png" onclick = "RemoveTextBox(this)" />'
+			}
+			function AddTextBox() {
+				var div = document.createElement('DIV');
+				div.innerHTML = GetDynamicTextBox("");
+				document.getElementById("TextBoxContainer").appendChild(div);
+			}
+			function RemoveTextBox(div) {
+				document.getElementById("TextBoxContainer").removeChild(div.parentNode);
+			}
+			
+			function RecreateDynamicTextboxes() {
+				var values = eval('<%=Values%>');
+				if (values != null) {
+					var html = "";
+					for (var i = 0; i < values.length; i++) {
+						html += "<div>" + GetDynamicTextBox(values[i]) + "</div>";
+					}
+					document.getElementById("TextBoxContainer").innerHTML = html;
+				}
+			}
+			window.onload = RecreateDynamicTextboxes;
+		</script>
+		<script type="text/javascript">
+			function GetDynamicRadioBox(value){
+				return '<input name = "DynamicRadioBox" type="radio" value = "true" />' +'true'+'<br>'
+				+ '<input name = "DynamicRadioBox" type="radio" value = "true" />' +'false'
+				
+			
+			}
+			function AddRadioBox() {
+				var div = document.createElement('DIV');
+				div.innerHTML = GetDynamicRadioBox("");
+				document.getElementById("RadioBoxContainer").appendChild(div);
+			}
+			function RemoveRadioBox(div) {
+				document.getElementById("RadioBoxContainer").removeChild(div.parentNode);
+			}
+			
+			function RecreateDynamicRadioboxes() {
+				var values = eval('<%=Values%>');
+				if (values != null) {
+					var html = "";
+					for (var i = 0; i < values.length; i++) {
+						html += "<div>" + GetDynamicRadioBox(values[i]) + "</div>";
+					}
+					document.getElementById("RadioBoxContainer").innerHTML = html;
+				}
+			}
+			window.onload = RecreateDynamicRadioboxes;
+		</script>
+		
+		
+		<title>Welcome to SMS-Voting</title>
+	
+	</head>
+<body>
+
+	<div class="container">
+		<div class="jumbotron">
+			<!--<script id="createpoll" type="text/template"> -->
+	
+			<div>
+				<label>Question</label>
+				<input id="question" type="text" class="span3" placeholder="Type a Question">
+				<span class="help-inline">eg:what is your favourite subject?</span>
+			</div>
+			<label>Select how will your audience respond?</label>
+			<div class="panel-group" id="accordion">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" 
+								href="#collapseOne">
+								TextOption
+							</a>
+						</h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse">
+						<div class="panel-body">
+							<input id="TxtbtnAdd" type="image" src="../../../assets/js/add.png" onclick="AddTextBox()" />
+	
+							<div id="TextBoxContainer">
+								<!--Textboxes will be added here -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" 
+								href="#collapseTwo">
+								Multiple Choice
+							</a>
+						</h4>
+					</div>
+					<div id="collapseTwo" class="panel-collapse collapse">
+						<div class="panel-body">
+							<input id="RadiobtnAdd" type="image" value="add" src="../../../assets/js/add.png" onclick="AddRadioBox()" />
+	
+							<div id="RadioBoxContainer">
+								<!--Textboxes will be added here -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" 
+								href="#collapseThree">
+								Clickable Image
+							</a>
+						</h4>
+					</div>
+				<div id="collapseThree" class="panel-collapse collapse">
+					<div class="panel-body">
+						<p><input type="text" class="span3" placeholder="Type a Question">
+						<button><img alt="add" src="../../../assets/js/add.png"></button> </p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p>creation date:<input type="date" name="pollcreateiondate" id="datepicker"></p>
+		<p>Set expiration date:<input type="date" name="pollcreateiontime" id="datepicker"></p>
+		<button id="push" type="button" class="btn btn-primary">Push</button>
+
+	</div>
+</div>
+
+
+<script src="../../../assets/js/createpoll.js"></script>	
+
+</body>
+
+
+</html>

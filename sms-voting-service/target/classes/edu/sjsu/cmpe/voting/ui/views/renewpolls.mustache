@@ -1,0 +1,95 @@
+<!doctype html>
+
+<html lang="en">
+<meta charset="utf-8">
+<head>
+
+<meta charset="ISO-8859-1">
+<title>Renew Polls</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<!-- script tags -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="//code.jquery.com/jquery.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<!-- application ui scripts -->
+
+<!-- script tags -->
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="//code.jquery.com/jquery.js"></script>
+            <!-- Latest compiled and minified JavaScript -->
+			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+			<!-- application ui scripts -->
+			<script src="../assets/js/renewpolls.js"></script>
+			
+  			<script>
+  			$(function() {
+				$( "#datepicker" ).datepicker({});
+			});
+		</script>
+
+
+</head>
+
+        <form id="form">
+        	<body>
+            <div class="container">
+                <div class="jumbotron">
+                    <!-- calls getPolls() from HomeResource -->
+                    <table id="poll" class="table table-hover">
+                    
+                    {{#poll}}
+                        <tr id="{{id}}"><td><input type="checkbox" id="checkbox" ></td>
+							<td>{{question}}</td>
+							<td><input type="date" name="pollcreateiondate" id="datepicker"></td>
+							
+						</tr>
+                        
+                    {{/poll}}
+                    </table>
+                        <button id="renew" type="button" class="btn btn-primary" onclick="renewPolls()">Renew</button>
+                </div>
+                    
+            </div> 
+            <!-- end of container -->
+           
+            	<script>  	
+  				function renewPolls()
+  				{
+  				 checkAll();
+				}
+
+				function checkAll() {
+				alert("in check all")
+    				jQuery('#form input[type="checkbox"]:checked').each(function () {
+        				
+        				alert('selected: ' + $(this).val());
+    					pollid=$(this).closest('tr').attr('id');
+    					alert("tr :::"+pollid);
+    					newEpieryDate=$("#datepicker").val();
+    					alert("td::"+$("#datepicker").val());
+    					var url = "http://localhost:8080/sms-voting/v1/admin/polls/"+pollid+"?endDate="+newEpieryDate;
+    					alert("url:: "+url);
+        				var ajax = $.ajax({
+	    									url: url,
+	    									type: "PUT",
+	    									dataType: "json",
+	    									contentType:"application/json",
+	    									success: function(response) {
+	    													alert("successfully updated");
+	    													}
+	    												
+								});	
+								
+    				});
+    				}
+  					</script>
+  			
+					</body>
+	   </form>
+</html>

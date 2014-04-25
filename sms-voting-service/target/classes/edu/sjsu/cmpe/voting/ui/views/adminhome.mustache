@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+
+
+</head>
+<body>
+<div class="container">
+<div class="jumbotron">
+<!-- calls getPolls() from HomeResource -->
+<table id="poll" class="table table-hover">
+{{#poll}}
+
+<tr>
+<td>{{question}}</td>
+<td> <button id="btnDel" type="button" class="btn btn-primary" > Delete </button></td>
+</tr>
+
+{{/poll}}
+
+</table>
+
+<button id="btnAdd" type="button" class="btn btn-primary" onclick="DoNav()" >Create Poll</button> 
+
+<button id="btnRenew" type="button" class="btn btn-primary" onclick="DoNav1()" >Renew Poll</button> 
+
+</div>
+
+
+</div> <!-- end of container -->
+
+<!-- script tags -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="//code.jquery.com/jquery.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<!-- application ui scripts -->
+<!-- <script src="../../../assets/js/sms.js"></script> -->
+<script src="../../../assets/js/adminpolldelete.js"></script>
+
+<!-- Script for navigating from homepage to new page -->
+<script type="text/javascript">
+function DoNav()
+{
+document.location.href = "polls/createPoll";
+}
+</script>
+<script type="text/javascript">
+function DoNav1()
+{
+document.location.href = "polls/renewPolls";
+}
+</script>
+</body>
+</html>
